@@ -1,0 +1,12 @@
+c:\users\hopesend\documents\visual studio 2013\Projects\TableParseMagic\TableParseMagic\bin\Debug\TableParseMagic.exe.config
+c:\users\hopesend\documents\visual studio 2013\Projects\TableParseMagic\TableParseMagic\bin\Debug\TableParseMagic.exe
+c:\users\hopesend\documents\visual studio 2013\Projects\TableParseMagic\TableParseMagic\bin\Debug\TableParseMagic.pdb
+c:\users\hopesend\documents\visual studio 2013\Projects\TableParseMagic\TableParseMagic\bin\Debug\HtmlAgilityPack.dll
+c:\users\hopesend\documents\visual studio 2013\Projects\TableParseMagic\TableParseMagic\bin\Debug\HtmlAgilityPack.pdb
+c:\users\hopesend\documents\visual studio 2013\Projects\TableParseMagic\TableParseMagic\bin\Debug\HtmlAgilityPack.xml
+c:\users\hopesend\documents\visual studio 2013\Projects\TableParseMagic\TableParseMagic\obj\Debug\TableParseMagic.fmTableParseMagic.resources
+c:\users\hopesend\documents\visual studio 2013\Projects\TableParseMagic\TableParseMagic\obj\Debug\TableParseMagic.Properties.Resources.resources
+c:\users\hopesend\documents\visual studio 2013\Projects\TableParseMagic\TableParseMagic\obj\Debug\TableParseMagic.csproj.GenerateResource.Cache
+c:\users\hopesend\documents\visual studio 2013\Projects\TableParseMagic\TableParseMagic\obj\Debug\TableParseMagic.exe
+c:\users\hopesend\documents\visual studio 2013\Projects\TableParseMagic\TableParseMagic\obj\Debug\TableParseMagic.pdb
+C:\Users\Hopesend\Documents\Visual Studio 2013\Projects\TableParseMagic\TableParseMagic\obj\Debug\TableParseMagic.fmOpenWebDialog.resources
