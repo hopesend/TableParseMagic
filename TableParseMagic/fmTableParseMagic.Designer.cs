@@ -103,6 +103,7 @@
             this.btFromClipboard.Size = new System.Drawing.Size(40, 40);
             this.btFromClipboard.TabIndex = 6;
             this.btFromClipboard.UseVisualStyleBackColor = true;
+            this.btFromClipboard.Click += new System.EventHandler(this.btFromClipboard_Click);
             // 
             // fmTableParseMagic
             // 

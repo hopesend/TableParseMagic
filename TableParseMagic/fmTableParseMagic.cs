@@ -24,25 +24,7 @@ namespace TableParseMagic
     {
         public HtmlAgilityPack.HtmlDocument doc;
         public List<List<string>> table;
-        public string info
-        {
-            set 
-            {
-                if (value.Equals(string.Empty))
-                    Deactive_Buttons_To();
-                else
-                {
-                    if (Get_Info())
-                    {
-                        Active_Buttons_To();
-                        Get_Tables();
-                    }
-                    else
-                        Deactive_Buttons_To();
-                }
-            }
-        }
-
+        public string info;
         public FromInfo EnumFrom;
 
         public fmTableParseMagic()
@@ -73,38 +55,59 @@ namespace TableParseMagic
             fmOpenWebDialog fmWeb = new fmOpenWebDialog();
             fmWeb.ShowDialog();
             info = fmWeb.web;
+
+            Get_Info();
         }
 
-        private bool Get_Info()
+        private void btFromDisk_Click(object sender, EventArgs e)
         {
-            switch (EnumFrom)
+            EnumFrom = FromInfo.Disk;
+            if (ofdOpenText.ShowDialog() == DialogResult.OK)
+                info = ofdOpenText.FileName;
+
+            Get_Info();
+        }
+
+        private void btFromClipboard_Click(object sender, EventArgs e)
+        {
+            EnumFrom = FromInfo.Clipboard;
+            if (Clipboard.ContainsText(TextDataFormat.Html))
+                info = "clipboard";
+
+            Get_Info();
+        }
+
+        private void Get_Info()
+        {
+            if (!info.Equals(string.Empty))
             {
+                Active_Buttons_To();
+                switch (EnumFrom)
+                {
                 case FromInfo.Web:
                     {
-                        WebClient webClient = new WebClient();
-                        string tables = webClient.DownloadString("http://www.phenoelit.org/dpl/dpl.html");
-
-                        if (tables.Equals(string.Empty))
-                            return false;
-
-                        doc.LoadHtml(tables);
-
+                        doc.LoadHtml(new WebClient().DownloadString(info));
                         break;
                     }
 
                 case FromInfo.Disk:
                     {
-                        doc.Load(ofdOpenText.FileName);
+                        doc.LoadHtml(File.ReadAllText(info));
                         break;
                     }
 
                 case FromInfo.Clipboard:
                     {
+                        doc.LoadHtml(Clipboard.GetText(TextDataFormat.Html));
                         break;
                     }
+                }
+
+                Get_Tables();
             }
-            
-            return true;
+            else
+                Deactive_Buttons_To();
+                
         }
 
         private void Get_Tables()
@@ -117,10 +120,6 @@ namespace TableParseMagic
                         .ToList();
         }
 
-        private void btFromDisk_Click(object sender, EventArgs e)
-        {
-            if (ofdOpenText.ShowDialog() == DialogResult.OK)
-                info = ofdOpenText.FileName;
-        }
+
     }
 }
