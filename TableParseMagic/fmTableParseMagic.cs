@@ -112,6 +112,18 @@ namespace TableParseMagic
 
         private void Get_Tables()
         {
+            byte cont = 0;
+            foreach(HtmlNode nodo in doc.DocumentNode.SelectSingleNode("//table").Descendants("tr").First().Elements("td"))
+            {
+                if (nodo.InnerText.Trim().Equals(string.Empty))
+                    cbHeaders.Items.Add(cont + " - EMPTY HEADER");
+                else
+                    cbHeaders.Items.Add(cont + " - " + nodo.InnerText.Trim());
+
+                cont++;
+            }
+            cbHeaders.SelectedIndex = 0;
+
             table = doc.DocumentNode.SelectSingleNode("//table")
                         .Descendants("tr")
                         .Skip(1)
@@ -120,6 +132,69 @@ namespace TableParseMagic
                         .ToList();
         }
 
+        private void btAdd_Click(object sender, EventArgs e)
+        {
+            if (lvHeadersCollection.FindItemWithText(cbHeaders.SelectedItem.ToString()) == null)
+            {
+                lvHeadersCollection.Items.Add(new ListViewItem(cbHeaders.SelectedItem.ToString()));
+            }
+        }
 
+        private void btRemove_Click(object sender, EventArgs e)
+        {
+            if (lvHeadersCollection.FindItemWithText(cbHeaders.SelectedItem.ToString()) != null)
+            {
+                lvHeadersCollection.Items.Remove(lvHeadersCollection.FindItemWithText(cbHeaders.SelectedItem.ToString()));
+            }
+        }
+
+        private void cbRemoveDuplicate_CheckedChanged(object sender, EventArgs e)
+        {
+            tbNDuplicate.Enabled = cbRemoveDuplicate.Checked;
+        }
+
+        private void btToTXT_Click(object sender, EventArgs e)
+        {
+            List<List<string>> tableParse = new List<List<string>>();
+
+            if(cbWithHeader.Checked)
+            {
+                List<string> aux = new List<string>();
+
+                //With Header
+                if (lvHeadersCollection.Items.Count > 0)
+                {
+                    foreach (ListViewItem item in lvHeadersCollection.Items)
+                    {
+                        aux.Add(doc.DocumentNode.SelectSingleNode("//table").Descendants("tr").First().Elements("td").ToArray()[Convert.ToInt32(item.Text.Split()[0])].InnerText.ToString());
+                    }
+
+                    tableParse.Add(aux);
+                }
+                else
+                {
+                    foreach (HtmlNode nodo in doc.DocumentNode.SelectSingleNode("//table").Descendants("tr").First().Elements("td"))
+                    {
+                        aux.Add(nodo.InnerText.Trim());
+                    }
+
+                    tableParse.Add(aux);
+                }
+            }
+
+            //Remove Duplicate
+            if (cbRemoveDuplicate.Checked)
+            {
+                if (!tbNDuplicate.Text.Equals(string.Empty))
+                {
+
+                }
+            }
+        }
+
+        private void btToCSV_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
